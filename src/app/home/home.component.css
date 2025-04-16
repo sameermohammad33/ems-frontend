@@ -1,36 +1,274 @@
+/* Base Styles */
+:host {
+  display: block;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Navbar Styles */
+.navbar {
+  background: linear-gradient(90deg, #1a2a6c, #b21f1f, #fdbb2d);
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-brand h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(to right, #fff, #f8f9fa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-button, .logout-button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+}
+
+.nav-button {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  backdrop-filter: blur(10px);
+}
+
+.nav-button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.logout-button {
+  background-color: #ff4757;
+  color: white;
+}
+
+.logout-button:hover {
+  background-color: #ff6b81;
+  transform: translateY(-2px);
+}
+
+/* Main Content Styles */
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.section-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.section-header h2 {
+  font-size: 2rem;
+  color: #2c3e50;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Event Cards */
 .event-cards {
-    display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  position: relative;
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.event-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-body p {
+  margin: 0.75rem 0;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.card-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #eee;
+  text-align: right;
+}
+
+.book-button {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.book-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(245, 87, 108, 0.3);
+}
+
+/* No Events Styling */
+.no-events {
+  text-align: center;
+  padding: 3rem;
+  color: #7f8c8d;
+}
+
+.no-events i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #bdc3c7;
+}
+
+/* Feedback Section */
+.feedback-section {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-top: 3rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.feedback-form textarea {
+  width: 100%;
+  min-height: 150px;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: inherit;
+  resize: vertical;
+  margin-bottom: 1rem;
+  transition: border 0.3s ease;
+}
+
+.feedback-form textarea:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+.submit-button {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.submit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 242, 254, 0.3);
+}
+
+/* Footer Styles */
+.app-footer {
+  background: #2c3e50;
+  color: white;
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: auto;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    padding: 1rem;
+  }
+  
+  .navbar-links {
+    margin-top: 1rem;
     flex-wrap: wrap;
-    gap: 1rem;
+    justify-content: center;
   }
   
-  .card {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 16px;
-    background-color: #f9f9f9;
-    width: 300px;
+  .event-cards {
+    grid-template-columns: 1fr;
   }
-  
-  .card h3 {
-    margin: 0 0 8px;
-  }
-  
-  .card p {
-    margin: 4px 0;
-  }
-  
-  .card button {
-    margin-top: 12px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .card button:hover {
-    background-color: #0056b3;
-  }
-  
+}
