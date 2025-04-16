@@ -1,0 +1,22 @@
+<div class="create-event-container">
+    <h2>Create Event</h2>
+    <form [formGroup]="createEventForm" (ngSubmit)="onSubmit()">
+      <label for="name">Event Name:</label>
+      <input type="text" id="name" formControlName="name" placeholder="Enter event name">
+  
+      <label for="category">Category:</label>
+      <input type="text" id="category" formControlName="category" placeholder="Enter event category">
+  
+      <label for="location">Location:</label>
+      <input type="text" id="location" formControlName="location" placeholder="Enter event location">
+  
+      <label for="date">Date:</label>
+      <input type="date" id="date" formControlName="date">
+  
+      <label for="availableTickets">Available Tickets:</label>
+      <input type="number" id="availableTickets" formControlName="availableTickets" placeholder="Enter number of available tickets">
+  
+      <button type="submit">Create Event</button>
+    </form>
+  </div>
+  
