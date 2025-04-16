@@ -1,0 +1,35 @@
+<div class="events-container">
+    <!-- Loading state -->
+    <div *ngIf="isLoading" class="loading">
+      <p>Loading events...</p>
+    </div>
+  
+    <!-- Error state -->
+    <div *ngIf="errorMessage" class="error">
+      {{ errorMessage }}
+    </div>
+  
+    <!-- Events list -->
+    <div *ngIf="!isLoading && !errorMessage">
+      <div class="card" *ngFor="let event of events">
+        <div class="event-details">
+          <h3>{{ event.name }}</h3>
+          <p><strong>Category:</strong> {{ event.category }}</p>
+          <p><strong>Location:</strong> {{ event.location }}</p>
+          <p><strong>Date:</strong> {{ event.date | date:'mediumDate' }}</p>
+          <p><strong>Tickets Available:</strong> {{ event.availableTickets }}</p>
+        </div>
+        <div class="ticket-booking">
+          <button 
+            (click)="bookTickets(event.id)"
+            [disabled]="event.availableTickets <= 0">
+            {{ event.availableTickets > 0 ? 'Book Tickets' : 'Sold Out' }}
+          </button>
+        </div>
+      </div>
+  
+      <div *ngIf="events.length === 0" class="no-events">
+        <p>No events available at the moment.</p>
+      </div>
+    </div>
+  </div>
