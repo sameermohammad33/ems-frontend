@@ -1,31 +1,29 @@
-import { Component, OnInit, Inject, PLATFORM_ID, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../service/auth.service';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
-import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterLink
+  ],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   errorMessage: string = '';
-  isLoggedIn = false;
-  isLoginFailed = false;
-  role = '';
+  isLoading: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router,
-    @Inject(PLATFORM_ID) private platformId: Object
+    private router: Router
   ) {
     this.loginForm = this.fb.group({
       name: ['', [Validators.required]],
@@ -37,28 +35,28 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit(): void {
-    if (this.loginForm.valid) {
-      if (isPlatformBrowser(this.platformId)) {
-        // Clear local storage
-        localStorage.clear();
-      }
+    if (this.loginForm.valid && !this.isLoading) {
+      this.isLoading = true;
+      this.errorMessage = '';
+      
+      // Clear local storage
+      localStorage.clear();
 
-      console.log('Form Submitted', this.loginForm.value);
-
-      this.authService.login(this.loginForm.value).subscribe(
-        response => {
-          this.role = response.user.role;
-          this.isLoginFailed = false;
-          this.isLoggedIn = true;
-          alert('Logged in as ' + this.role + ' successfully');
-
+      this.authService.login(this.loginForm.value).subscribe({
+        next: (response) => {
+          this.isLoading = false;
+          alert(`Logged in as ${response.user.role} successfully`);
           this.router.navigate(['/home']);
         },
-        err => {
-          this.isLoginFailed = true;
-          alert('Login Failed: ' + err.error.message);
+        error: (err) => {
+          this.isLoading = false;
+          this.errorMessage = err.error?.message || 'Login failed. Please try again.';
+          alert(`Error: ${this.errorMessage}`);
         }
-      );
+      });
     }
   }
 }
+
+
+
