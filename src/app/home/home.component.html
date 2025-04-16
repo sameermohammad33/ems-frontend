@@ -1,0 +1,39 @@
+<div>
+  <h1>Welcome to the Home Page</h1>
+
+<div class="logout-container">
+  <button class="logout-button" (click)="logout()">Logout</button>
+</div>
+
+  <div *ngIf="role === 'ADMIN'">
+    <button (click)="createEvent()">Create Event</button>
+    <div *ngIf="showCreateEventForm">
+      <app-create-event></app-create-event>
+    </div>
+  </div>
+
+  <div *ngIf="role === 'USER'">
+    <button (click)="showAvailableEvents()">
+      {{ showEvents ? 'Hide' : 'Show' }} Available Events
+    </button>
+    
+    <div *ngIf="showEvents">
+      <h2>Available Events</h2>
+      <div class="event-cards">
+        <div class="card" *ngFor="let event of events">
+          <h3>{{ event.name }}</h3>
+          <p>Category: {{ event.category }}</p>
+          <p>Location: {{ event.location }}</p>
+          <p>Date: {{ event.date | date }}</p>
+          <p>Tickets Available: {{ event.availableTickets }}</p>
+          <button (click)="bookEvent(event.eventId)">Book Tickets</button>
+        </div>
+      </div>
+
+      <div *ngIf="events.length === 0">
+        <p>No events available at the moment.</p>
+      </div>
+    </div>
+
+    <h2>Feedback Section</h2>
+    <textarea placeholder="Write your feedback here"></textarea>
