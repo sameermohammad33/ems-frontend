@@ -1,0 +1,36 @@
+.event-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #f9f9f9;
+    width: 300px;
+  }
+  
+  .card h3 {
+    margin: 0 0 8px;
+  }
+  
+  .card p {
+    margin: 4px 0;
+  }
+  
+  .card button {
+    margin-top: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .card button:hover {
+    background-color: #0056b3;
+  }
+  
