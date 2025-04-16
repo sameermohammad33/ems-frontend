@@ -1,0 +1,72 @@
+<!-- <div class="entireRegisterPage">
+    <div class="login-container">
+        <h2>Register</h2>
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <label >Name:</label>
+            <input type="text" formControlName="name" placeholder="Enter your Name">
+             <div *ngIf=" registerForm.controls['name'].touched">
+                <small>Name is required. </small>
+            </div>
+            <label >Email:</label>
+            <input type="email" formControlName="email" placeholder="Enter email">
+            <div *ngIf="registerForm.controls['email'].invalid && registerForm.controls['email'].touched">
+                <small>Email is required and should be valid. </small>
+            </div>
+            <label >Password: </label>
+            <input type="password" formControlName="password" placeholder="Enter password">
+
+            <input type="text" formControlName="role" placeholder="Enter your role">
+            <div *ngIf=" registerForm.controls['role'].touched">
+                <small>Role is required. </small>
+            </div>
+
+            <input type="text" formControlName="contactNumber" placeholder="Enter your Mobile Number">
+            <div *ngIf=" registerForm.controls['phone'].touched">
+                <small>Mobile Number is required. </small>
+            </div> 
+    
+            <button type="submit" >Register</button>
+        </form>
+    
+    
+        <p>Don't have an Account? <a class="nav-link" routerLink = "/auth/login">Login</a></p>
+    </div>
+    </div>
+     -->
+
+     <div class="body">
+        <div class="content">
+           <div class="text">
+              Registration
+           </div>
+           <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+              <div class="field">
+                  <input type="text" formControlName="name" placeholder="Username">
+                 <span class="fas fa-user"></span>
+              </div><br>
+              <div class="field">
+                  <input type="email" formControlName="email" placeholder="Email">
+                 <span class="fas fa-user"></span>
+              </div><br>
+              <div class="field">
+                  <input type="password" formControlName="password" placeholder="Password">
+                 <span class="fas fa-lock"></span>
+              </div><br>
+              <div class="field">
+                <input type="text" formControlName="role" placeholder="Role">
+               <span class="fas fa-lock"></span>
+            </div><br>
+            <div class="field">
+                <input type="text" formControlName="contactNumber" placeholder="Mobile Number">
+               <span class="fas fa-lock"></span>
+            </div><br><br>
+              <button type="submit" >Register</button>
+              <div class="sign-up">
+                 Already a member?
+                 <a class="nav-link" routerLink = "/login">Login</a>
+              </div>
+           </form>
+        </div>
+      </div>
+
+  
