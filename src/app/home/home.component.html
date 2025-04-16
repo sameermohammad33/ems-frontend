@@ -1,39 +1,87 @@
-<div>
-  <h1>Welcome to the Home Page</h1>
-
-<div class="logout-container">
-  <button class="logout-button" (click)="logout()">Logout</button>
-</div>
-
-  <div *ngIf="role === 'ADMIN'">
-    <button (click)="createEvent()">Create Event</button>
-    <div *ngIf="showCreateEventForm">
-      <app-create-event></app-create-event>
+<div class="app-container">
+  <!-- Beautiful Navbar -->
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <h1>Event Management System</h1>
     </div>
-  </div>
+    <div class="navbar-links">
+      <div class="nav-item" *ngIf="role === 'ADMIN'">
+        <button class="nav-button" (click)="createEvent()">
+          <i class="fas fa-plus-circle"></i> Create Event
+        </button>
+      </div>
+      <div class="nav-item">
+        <button class="nav-button" (click)="showAvailableEvents()">
+          <i class="fas fa-calendar-alt"></i> {{ showEvents ? 'Hide' : 'Show' }} Events
+        </button>
+      </div>
+      <div class="nav-item">
+        <button class="logout-button" (click)="logout()">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+      </div>
+    </div>
+  </nav>
 
-  <div *ngIf="role === 'USER'">
-    <button (click)="showAvailableEvents()">
-      {{ showEvents ? 'Hide' : 'Show' }} Available Events
-    </button>
-    
-    <div *ngIf="showEvents">
-      <h2>Available Events</h2>
-      <div class="event-cards">
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Admin Section -->
+    <div *ngIf="role === 'ADMIN' && showCreateEventForm" class="admin-section">
+      <div class="section-header">
+        <h2><i class="fas fa-magic"></i> Create New Event</h2>
+      </div>
+      <div class="form-container">
+        <app-create-event></app-create-event>
+      </div>
+    </div>
+
+    <!-- Events Section -->
+    <div *ngIf="showEvents" class="events-section">
+      <div class="section-header">
+        <h2><i class="fas fa-star"></i> Available Events</h2>
+      </div>
+      
+      <div *ngIf="events.length > 0" class="event-cards">
         <div class="card" *ngFor="let event of events">
-          <h3>{{ event.name }}</h3>
-          <p>Category: {{ event.category }}</p>
-          <p>Location: {{ event.location }}</p>
-          <p>Date: {{ event.date | date }}</p>
-          <p>Tickets Available: {{ event.availableTickets }}</p>
-          <button (click)="bookEvent(event.eventId)">Book Tickets</button>
+          <div class="card-header">
+            <h3>{{ event.name }}</h3>
+            <span class="event-badge">{{ event.category }}</span>
+          </div>
+          <div class="card-body">
+            <p><i class="fas fa-map-marker-alt"></i> {{ event.location }}</p>
+            <p><i class="far fa-calendar"></i> {{ event.date | date:'fullDate' }}</p>
+            <p><i class="fas fa-ticket-alt"></i> {{ event.availableTickets }} tickets left</p>
+          </div>
+          <div class="card-footer">
+            <button class="book-button" (click)="bookEvent(event.eventId)">
+              <i class="fas fa-bookmark"></i> Book Now
+            </button>
+          </div>
         </div>
       </div>
 
-      <div *ngIf="events.length === 0">
-        <p>No events available at the moment.</p>
+      <div *ngIf="events.length === 0" class="no-events">
+        <i class="far fa-calendar-times"></i>
+        <p>No events available at the moment</p>
       </div>
     </div>
 
-    <h2>Feedback Section</h2>
-    <textarea placeholder="Write your feedback here"></textarea>
+    <!-- Feedback Section -->
+    <div class="feedback-section">
+      <div class="section-header">
+        <h2><i class="fas fa-comment-dots"></i> Share Your Feedback</h2>
+      </div>
+      <div class="feedback-form">
+        <textarea placeholder="We'd love to hear your thoughts..."></textarea>
+        <button class="submit-button">
+          <i class="fas fa-paper-plane"></i>Submit Feedback
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <footer class="app-footer">
+    <p>2023 Event Management System, All rights reserved.</p>
+  </footer>
+</div>
